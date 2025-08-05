@@ -422,20 +422,23 @@ export default function FileDownloadContainer() {
       </header>
 
       {/* Skip to Download Button (Above All Ads) */}
-      <div className="container mx-auto px-4 pt-4 flex justify-center">
-        <Tooltip text="Skip all steps and ads. Instant download for $1.00">
-          <button
-            onClick={handleSkipToDownload}
-            className="flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-lg border border-yellow-300 transition duration-300 text-lg"
-            aria-label="Skip to download for $1"
-            style={{ zIndex: 50 }}
-          >
-            <DollarSign className="h-6 w-6" />
-            <span>Skip to Download</span>
-            <span className="font-bold">$1</span>
-          </button>
-        </Tooltip>
-      </div>
+      {/* Removed on landing page */}
+      {currentPage !== "landing" && (
+        <div className="container mx-auto px-4 pt-4 flex justify-center">
+          <Tooltip text="Skip all steps and ads. Instant download for $1.00">
+            <button
+              onClick={handleSkipToDownload}
+              className="flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-lg border border-yellow-300 transition duration-300 text-lg"
+              aria-label="Skip to download for $1"
+              style={{ zIndex: 50 }}
+            >
+              <DollarSign className="h-6 w-6" />
+              <span>Skip to Download</span>
+              <span className="font-bold">$1</span>
+            </button>
+          </Tooltip>
+        </div>
+      )}
 
       {/* Skip Modal */}
       {showSkipModal && (
@@ -507,7 +510,7 @@ export default function FileDownloadContainer() {
       )}
 
       {/* Top Banner Ad */}
-      {!isAdClosed("topBanner") && (
+      {currentPage !== "landing" && !isAdClosed("topBanner") && (
         <div className="container mx-auto px-4 pt-4">
           <CustomAdSlot position="topBanner" />
         </div>
@@ -534,7 +537,7 @@ export default function FileDownloadContainer() {
         {/* Layout: Sidebars + Main */}
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left Sidebar Ad */}
-          {!isAdClosed("leftSidebar") && (
+          {currentPage !== "landing" && !isAdClosed("leftSidebar") && (
             <div className="md:w-1/4 order-2 md:order-1">
               <CustomAdSlot position="leftSidebar" />
             </div>
@@ -599,9 +602,7 @@ export default function FileDownloadContainer() {
                     </ul>
                   </div>
                   {/* Inline Ad */}
-                  {!isAdClosed("inlineLanding") && (
-                    <CustomAdSlot position="inline" />
-                  )}
+                  {/* No inline ad on landing page */}
                   {/* Social Share */}
                   <div className="pt-2">
                     <SocialShare
@@ -1207,7 +1208,7 @@ export default function FileDownloadContainer() {
           </div>
 
           {/* Right Sidebar Ad */}
-          {!isAdClosed("rightSidebar") && (
+          {currentPage !== "landing" && !isAdClosed("rightSidebar") && (
             <div className="md:w-1/4 order-3">
               <CustomAdSlot position="rightSidebar" />
             </div>
@@ -1215,7 +1216,7 @@ export default function FileDownloadContainer() {
         </div>
 
         {/* Bottom Banner Ad */}
-        {!isAdClosed("bottomBanner") && (
+        {currentPage !== "landing" && !isAdClosed("bottomBanner") && (
           <div className="container mx-auto px-4 pt-4">
             <CustomAdSlot position="bottomBanner" />
           </div>
