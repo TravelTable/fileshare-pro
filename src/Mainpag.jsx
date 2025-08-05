@@ -20,6 +20,7 @@ import {
   Users,
   ThumbsUp,
   ThumbsDown,
+  DollarSign,
 } from "lucide-react";
 
 // --- Custom AdSlot Component for New Ad ---
@@ -60,8 +61,6 @@ function CustomAdSlot({ position, zone = "161468" }) {
     </div>
   );
 }
-
-// --- Interstitial Ad Trigger (Removed) ---
 
 // --- Tooltip Component ---
 function Tooltip({ children, text }) {
@@ -185,6 +184,11 @@ export default function FileDownloadContainer() {
   const [captchaError, setCaptchaError] = useState("");
   const [surveyAnswer, setSurveyAnswer] = useState("");
   const [surveySubmitted, setSurveySubmitted] = useState(false);
+
+  // --- Skip to Download Modal State ---
+  const [showSkipModal, setShowSkipModal] = useState(false);
+  const [skipLoading, setSkipLoading] = useState(false);
+  const [skipPaid, setSkipPaid] = useState(false);
 
   // --- File metadata ---
   const fileData = {
@@ -360,6 +364,31 @@ export default function FileDownloadContainer() {
     setTimeout(() => setSurveySubmitted(false), 2000);
   };
 
+  // --- Skip to Download Logic ---
+  const handleSkipToDownload = () => {
+    setShowSkipModal(true);
+  };
+
+  const handleSkipModalClose = () => {
+    setShowSkipModal(false);
+    setSkipLoading(false);
+    setSkipPaid(false);
+  };
+
+  const handleSkipPayment = () => {
+    setSkipLoading(true);
+    // Simulate payment process
+    setTimeout(() => {
+      setSkipLoading(false);
+      setSkipPaid(true);
+      setTimeout(() => {
+        setShowSkipModal(false);
+        setSkipPaid(false);
+        setCurrentPage("download");
+      }, 1200);
+    }, 1800);
+  };
+
   // --- Progress Bar Logic ---
   const stepMap = {
     landing: 1,
@@ -391,6 +420,91 @@ export default function FileDownloadContainer() {
           <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
       </header>
+
+      {/* Skip to Download Button (Above All Ads) */}
+      <div className="container mx-auto px-4 pt-4 flex justify-center">
+        <Tooltip text="Skip all steps and ads. Instant download for $1.00">
+          <button
+            onClick={handleSkipToDownload}
+            className="flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-lg border border-yellow-300 transition duration-300 text-lg"
+            aria-label="Skip to download for $1"
+            style={{ zIndex: 50 }}
+          >
+            <DollarSign className="h-6 w-6" />
+            <span>Skip to Download</span>
+            <span className="font-bold">$1</span>
+          </button>
+        </Tooltip>
+      </div>
+
+      {/* Skip Modal */}
+      {showSkipModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-8 max-w-md w-full relative">
+            <button
+              onClick={handleSkipModalClose}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              aria-label="Close"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="flex flex-col items-center">
+              <DollarSign className="h-12 w-12 text-yellow-400 mb-2" />
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+                Skip to Download
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4 text-center">
+                Instantly access your download and skip all ads and waiting steps for only <span className="font-bold">$1.00</span>.
+              </p>
+              {!skipPaid && (
+                <button
+                  onClick={handleSkipPayment}
+                  className={`flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-lg shadow transition duration-300 text-lg ${
+                    skipLoading ? "opacity-60 cursor-not-allowed" : ""
+                  }`}
+                  disabled={skipLoading}
+                  aria-label="Pay $1 and skip to download"
+                >
+                  <DollarSign className="h-6 w-6" />
+                  <span>Pay $1 &amp; Download Now</span>
+                </button>
+              )}
+              {skipLoading && (
+                <div className="flex items-center mt-4 text-yellow-600 dark:text-yellow-400">
+                  <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8z"
+                    />
+                  </svg>
+                  Processing payment...
+                </div>
+              )}
+              {skipPaid && (
+                <div className="flex flex-col items-center mt-4 text-green-600 dark:text-green-400">
+                  <CheckCircle className="h-8 w-8 mb-1" />
+                  <span className="font-bold text-lg">Payment Successful!</span>
+                  <span className="text-sm">Redirecting to download...</span>
+                </div>
+              )}
+              <div className="mt-6 text-xs text-gray-400 dark:text-gray-500 text-center">
+                Powered by FileShare Pro Secure Payments.<br />
+                <span className="italic">No recurring charges. One-time payment.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Top Banner Ad */}
       {!isAdClosed("topBanner") && (
@@ -467,6 +581,23 @@ export default function FileDownloadContainer() {
                   <p className="text-gray-600 dark:text-gray-300 text-center">
                     {fileData.description}
                   </p>
+                  {/* File Preview */}
+                  <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mt-2">
+                    <div className="flex items-center mb-2">
+                      <Eye className="h-5 w-5 text-blue-500 mr-2" />
+                      <span className="font-medium text-gray-700 dark:text-gray-200">
+                        Preview: Files inside archive
+                      </span>
+                    </div>
+                    <ul className="text-xs text-gray-600 dark:text-gray-400 grid grid-cols-2 gap-x-4 gap-y-1">
+                      {fileData.preview.map((f, i) => (
+                        <li key={i} className="truncate">
+                          <FileText className="inline h-4 w-4 mr-1 text-gray-400" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   {/* Inline Ad */}
                   {!isAdClosed("inlineLanding") && (
                     <CustomAdSlot position="inline" />
