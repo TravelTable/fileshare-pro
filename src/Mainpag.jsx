@@ -173,6 +173,17 @@ export default function FileDownloadContainer() {
   const [surveyAnswer, setSurveyAnswer] = useState("");
   const [surveySubmitted, setSurveySubmitted] = useState(false);
 
+  // --- Simulated ZIP contents for preview ---
+  const simulatedZipContents = [
+    "Video.mp4",
+    "Video1.mp4",
+    "Video2.mp4",
+    "Photo4.jpg",
+    "Video9.mp4",
+    "Lil Tay full bod vid.mp4",
+    "... +22"
+  ];
+
   // --- File metadata ---
   const fileData = {
     name: "Lil Tay OF LEAKED.zip",
