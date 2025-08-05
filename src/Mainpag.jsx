@@ -467,23 +467,6 @@ export default function FileDownloadContainer() {
                   <p className="text-gray-600 dark:text-gray-300 text-center">
                     {fileData.description}
                   </p>
-                  {/* File Preview */}
-                  <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mt-2">
-                    <div className="flex items-center mb-2">
-                      <Eye className="h-5 w-5 text-blue-500 mr-2" />
-                      <span className="font-medium text-gray-700 dark:text-gray-200">
-                        Preview: Files inside archive
-                      </span>
-                    </div>
-                    <ul className="text-xs text-gray-600 dark:text-gray-400 grid grid-cols-2 gap-x-4 gap-y-1">
-                      {fileData.preview.map((f, i) => (
-                        <li key={i} className="truncate">
-                          <FileText className="inline h-4 w-4 mr-1 text-gray-400" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                   {/* Inline Ad */}
                   {!isAdClosed("inlineLanding") && (
                     <CustomAdSlot position="inline" />
