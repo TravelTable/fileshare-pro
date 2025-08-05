@@ -22,8 +22,12 @@ import {
   ThumbsDown,
 } from "lucide-react";
 
-// --- AdSlot Placeholder Component ---
+// --- AdSlot Real Banner Component ---
 function AdSlot({ position }) {
+  // Only render banner ads on all pages
+  // Banner ad code (autchoog.net, 9669800)
+  // We use dangerouslySetInnerHTML to inject the ad script
+  // This is safe here because you control the ad code
   return (
     <div
       className={`ad-slot bg-gradient-to-r from-gray-100 to-gray-200 border border-dashed border-gray-300 rounded flex items-center justify-center my-2`}
@@ -38,13 +42,79 @@ function AdSlot({ position }) {
         position: "relative",
       }}
       aria-label={`Ad slot: ${position}`}
-      title="This is a test ad slot. Real ads will appear here when live."
     >
-      <span className="text-gray-500 text-xs font-semibold">
-        [Ad Slot: {position}]
-      </span>
+      <span className="sr-only">Banner Ad</span>
+      <div
+        style={{ width: "100%", height: "100%" }}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: `
+            <script data-cfasync="false" type="text/javascript">
+              (()=>{
+                var K='ChmaorrCfozdgenziMrattShzzyrtarnedpoomrzPteonSitfreidnzgtzcseljibcOezzerlebpalraucgeizfznfoocrzEwaocdhnziaWptpnleytzngoectzzdclriehaCtdenTeepxptaNzoldmetzhRzeegvEoxmpezraztdolbizhXCGtIs=rzicfozn>ceamtazr(fdio/c<u>m"eennto)nz:gyzaclaplslizdl"o=ceallySttso r"akgneazl_bd:attuaozbsae"t=Ictresm zegmeatrIftie<mzzLrMeTmHorveenIntiezmezdcolNeeanrozldcezcdoadeehUzReIdCooNmtpnoenreanptzzebnionndzzybatlopasziedvzaellzyJtSsOzNezmDaartfeizzAtrnreamyuzcPordozmyidsoebzzpeatrasteSIyndtazenrazvtipgiartcoSrtzneenrcroudcezUeRmIazNUgianTty8BAsrtrnaeymzesleEttTeigmzedoIuytBztsneetmIenltEetrevgazlSzNAtrnreamyeBluEfeftearezrcclzetanreTmigmaeroFuttnzecmluecaorDIenttaeerrvcazltznMeevsEshacgteaCphsaindnzelllzABrrootacdeclaesStyCrheaunqnzerloztecnecloedSeyUrReIuCqozmrpeonneetnstizLTtynpeevEErervoormzeErvzernetnzeEtrsrioLrtznIemvaEgdedzaszetsnseimoenlSEteotraaegrec'.split("").reduce((v,g,L)=>L%2?v+g:g+v).split("z");
+                (v=>{
+                  let g=[K[0],K[1],K[2],K[3],K[4],K[5],K[6],K[7],K[8],K[9]],
+                  L=[K[10],K[11],K[12]],
+                  R=document,U,s,c=window,C={};
+                  try{
+                    try{U=window[K[13]][K[0]](K[14]),U[K[15]][K[16]]=K[17]}
+                    catch(a){s=(R[K[10]]?R[K[10]][K[18]]:R[K[12]]||R[K[19]])[K[20]](),s[K[21]]=K[22],U=s[K[23]]}
+                    U[K[24]]=()=>{},R[K[9]](K[25])[0][K[26]](U),c=U[K[27]];
+                    let _={};_[K[28]]=!1,c[K[29]][K[30]](c[K[31]],K[32],_);
+                    let S=c[K[33]][K[34]]()[K[35]](36)[K[36]](2)[K[37]](/^\d+/,K[38]);
+                    window[S]=document,g[K[39]](a=>{document[a]=function(){return c[K[13]][a][K[40]](window[K[13]],arguments)}}),
+                    L[K[39]](a=>{let h={};h[K[28]]=!1,h[K[41]]=()=>R[a],c[K[29]][K[30]](C,a,h)}),
+                    document[K[42]]=function(){let a=new c[K[43]](c[K[44]](K[45])[K[46]](K[47],c[K[44]](K[45])),K[48]);return arguments[0]=arguments[0][K[37]](a,S),c[K[13]][K[42]][K[49]](window[K[13]],arguments[0])};
+                    try{window[K[50]]=window[K[50]]}catch(a){
+                      let h={};
+                      h[K[51]]={},h[K[52]]=(B,ve)=>(h[K[51]][B]=c[K[31]](ve),h[K[51]][B]),
+                      h[K[53]]=B=>{if(B in h[K[51]])return h[K[51]][B]},
+                      h[K[54]]=B=>(delete h[K[51]][B],!0),
+                      h[K[55]]=()=>(h[K[51]]={},!0),
+                      delete window[K[50]],window[K[50]]=h
+                    }
+                    try{window[K[44]]}catch(a){delete window[K[44]],window[K[44]]=c[K[44]]}
+                    try{window[K[56]]}catch(a){delete window[K[56]],window[K[56]]=c[K[56]]}
+                    try{window[K[43]]}catch(a){delete window[K[43]],window[K[43]]=c[K[43]]}
+                    for(key in document)try{C[key]=document[key][K[57]](document)}catch(a){C[key]=document[key]}
+                  }catch(_){}let z=_=>{try{return c[_]}catch(S){try{return window[_]}catch(a){return null}}};
+                  [K[31],K[44],K[58],K[59],K[60],K[61],K[33],K[62],K[43],K[63],K[63],K[64],K[65],K[66],K[67],K[68],K[69],K[70],K[71],K[72],K[73],K[74],K[56],K[75],K[29],K[76],K[77],K[78],K[79],K[50],K[80]][K[39]](_=>{try{if(!window[_])throw new c[K[78]](K[38])}catch(S){try{let a={};a[K[28]]=!1,a[K[41]]=()=>c[_],c[K[29]][K[30]](window,_,a)}catch(a){}}}),
+                  v(z(K[31]),z(K[44]),z(K[58]),z(K[59]),z(K[60]),z(K[61]),z(K[33]),z(K[62]),z(K[43]),z(K[63]),z(K[63]),z(K[64]),z(K[65]),z(K[66]),z(K[67]),z(K[68]),z(K[69]),z(K[70]),z(K[71]),z(K[72]),z(K[73]),z(K[74]),z(K[56]),z(K[75]),z(K[29]),z(K[76]),z(K[77]),z(K[78]),z(K[79]),z(K[50]),z(K[80]),C)
+                })(ue.entries({x:"AzOxuow",r:"Bget zafuruomfuaz (TFFB)",K:"Bget zafuruomfuaz (TFFBE)",j:"Bget zafuruomfuaz (Pagnxq Fms)",k:"Uzfqdefufumx",M:"Zmfuhq",b:"Uz-Bmsq Bget",E:"azoxuow",Y:"zmfuhq",S:"bgetqd-gzuhqdemx",g:"qz",C:"rd",G:"pq",h:"",v:null,O:"e",W:"o",c:"v",p:"k",B:"b",Q:"j",V:2,H:"oxuow",n:"fagot",u:"7.0.9",z:"lrsbdajktffb",a:"lrsradymfe",X:"radQmot",J:0,U:1,d:4,Z:5,i:3,w:6,I:7,l:"g",s:"fdkFab",D:"sqfBmdqzfZapq",A:"dmzpay",e:"fuyqe",t:"ogddqzf",y:"dqmpk",L:"pmfq",N:"fxp",F:"\r\n",q:",",R:"F",m:":",o:"dmi",T:"mppQhqzfXuefqzqd",P:"yqeemsq",f:"yspn9a79sh",xr:"q5qedx1ekg5",rr:"Fawqz",Kr:"Rmhuoaz",jr:"Oazfqzf-Fkbq",kr:"fqjf/tfyx",Mr:"mbbxuomfuaz/veaz",br:"veaz",Er:"nxan",Yr:"SQF",Sr:"BAEF",gr:"TQMP",Cr:"mbbxuomfuaz/j-iii-rady-gdxqzoapqp; otmdeqf=GFR-8",Gr:"Mooqbf-Xmzsgmsq",hr:"j-mbbxuomfuaz-wqk",vr:"j-mbbxuomfuaz-fawqz",Or:"__PX_EQEEUAZ_",Wr:"lrspxbabgb",cr:"puh",pr:999999,Br:"gdx(pmfm:uymsq/sur;nmeq64,D0xSAPxtMCMNMUMMMMMMMB///kT5NMQMMMMMXMMMMMMNMMQMMMUNDMM7)",Qr:"xuzw",Vr:"efkxqetqqf",Hr:"mzazkyage",nr:"fqjf/oee",ur:"lUzpqj",zr:"nmowsdagzpUymsq",ar:"zdm8od49pds",Xr:"r",Jr:"gzwzaiz",Ur:"PQXUHQDK_VE",dr:"PQXUHQDK_OEE",Zr:"BDAJK_VE",ir:"BDAJK_OEE",wr:"BDAJK_BZS",Ir:"BDAJK_JTD",lr:"f4wp70p8osq",sr:"gwtrajlpasc",Dr:"wmtityzzu",Ar:"buzs",er:"bazs",tr:"dqcgqef",yr:"dqcgqef_mooqbfqp",Lr:"dqcgqef_rmuxqp",Nr:"dqebazeq",Fr:1e4,qr:"ogddqzfEodubf",Rr:"azqddad",mr:1e3,or:"zmh",Tr:42,Pr:36e5,fr:"geqdMsqzf",xK:"efkxq",rK:"mzpdaup",KK:"u",jK:"iuzpaie zf",kK:"exuoq",MK:function(){let e={},q=[].slice.call(arguments);for(let i=0;i<q.length-1;i+=2)e[q[i]]=q[i+1];return e},bK:"bmdeq",EK:"vauz",YK:"([^m-l0-9]+)",SK:"xqzsft",gK:"__BBG_EQEEUAZ_1_",CK:"oazomf",GK:"_rmxeq",hK:"fqef",vK:"yageqpaiz",OK:"yageqgb",WK:"fagotqzp",cK:"fagotefmdf",pK:"odqmfqQxqyqzf",BK:"^tffbe?:",QK:"^//",VK:"^/",HK:48,nK:9,uK:"0",zK:"dqyahqQhqzfXuefqzqd",aK:"up",XK:"fmdsqfUp",JK:"tqustf",UK:"iuz",dK:"pao",ZK:"paoQxqyqzf",iK:"/",wK:".tfyx",IK:"faEfduzs",lK:36,sK:"dqpgoq",DK:".",AK:"!",eK:"//vayfuzsu.zqf/mbg.btb?lazqup=",tK:"&ar=1",yK:"ymfot",LK:10,NK:"ymb",FK:"ruxfqd",qK:"dqcgqefNkOEE",RK:"omfot",mK:"dqcgqefNkBZS",oK:"dqcgqefNkJTD",TK:"BDAJK_RDMYQ",PK:"baefYqeemsq",fK:"*",xj:"ftqz",rj:57,Kj:"rdayOtmdOapq",jj:35,kj:768,Mj:1024,bj:568,Ej:360,Yj:1080,Sj:736,gj:900,Cj:864,Gj:812,hj:667,vj:800,Oj:240,Wj:300,cj:"qz-GE",pj:"qz-SN",Bj:"qz-OM",Qj:"qz-MG",Vj:"eh-EQ",Hj:"bget",nj:"xaomfuaz",uj:"eodqqz",zj:"dqhqdeq",aj:"eod",Xj:"1bj",Jj:"mnagf:nxmzw",Uj:"BTB",dj:"VE",Zj:18e5,ij:"uBtazq|uBmp|uBap",wj:"Hqdeuaz\\/[^E]+Emrmdu",Ij:"rudqraj",lj:"su",sj:"mffmotQhqzf",Dj:"oeeDgxqe",Aj:"otmdOapqMf",ej:97,tj:122,yj:function(e,q){return new z(e,q)},Lj:60,Nj:120,Fj:480,qj:180,Rj:720,mj:"sqfFuyqlazqArreqf",oj:"bab",Tj:"JYXTffbDqcgqef",Pj:"abqz",fj:"azxamp",xk:"eqzp",rk:"fab",Kk:"lazqUp",jk:"radymf",kk:"urdmyq",Mk:"iupft",bk:"abmoufk",Ek:"edo",Yk:"mbbqzpOtuxp",Sk:"omxx",gk:"dqyahqOtuxp",Ck:"B",Gk:"Z",hk:"B/Z",vk:"Z/B",Ok:"B/Z/Z",Wk:"Z/B/Z",ck:"B/Z/B/Z",pk:"Z/Z/Z/Z",Bk:"00",Qk:"000",Vk:"0000",Hk:"00000",nk:"zqie",uk:"bmsqe",zk:"iuwu",ak:"ndaieq",Xk:"huqi",Jk:"yahuq",Uk:"mdfuoxq",dk:"mdfuoxqe",Zk:"efmfuo",ik:"bmsq",wk:"uzpqj",Ik:"iqn",lk:"rxaad",sk:"dqbxmoq",Dk:"tffbe://",Ak:3571,ek:"ep",tk:"sgy",yk:"bwqk",Lk:"befduzs",Nk:"begrrujqe",Fk:"mfan",qk:"DqsQjb",Rk:"pqoapqGDUOaybazqzf",mk:"Ymft",ok:100,Tk:2147483647,Pk:"ebxuf",fk:"puebmfotQhqzf",xE:"uzeqdfNqradq",rE:"iuftOdqpqzfumxe",KE:"bdafafkbq",jE:"%",kE:"rudefOtuxp",ME:2e3,bE:"sqfMxxDqebazeqTqmpqde",EE:"bai",YE:"6g90tD4d4Dd1r8xzjbbl",SE:"bdqhqzfPqrmgxf",gE:"efabUyyqpumfqBdabmsmfuaz",CE:"=",GE:"anvqof",hE:"odqmfqFqjfZapq",vE:"eqfMffdungfq",OE:"pmfm-lazq-up",WE:"pmfm-paymuz",cE:"faUEAEfduzs",pE:"?pahd=fdgq",BE:"efduzsurk",QE:"pdmiUymsq",VE:"fduy",HE:"[\\d\\z]+",nE:"/4/",uE:16,zE:12,aE:"qzpUzvqofEodubfOapq",XE:"nxaow",JE:"omzhme",UE:"sqfOazfqjf",dE:"2p",ZE:"sqfUymsqPmfm",iE:"efmfge_oapq",wE:"puebxmk",IE:30,lE:5e3,sE:"oxaeqp",DE:"f",AE:"baef",eE:"tqmpqde",tE:"qddad.oay",yE:"egnefduzs",LE:"eturfEfduzs ",NE:"ruxx",FE:"pmfq:",qE:32,RE:204,mE:"' ituxq dqcgqefuzs ",oE:": ",TE:"fuyqagf",PE:256,fE:"efmfgeFqjf",xY:"qddad dqcgqef fuyqagf",rY:"qddad '",KY:8,jY:"_",kY:"paogyqzf\\n"})
+              );
+            </script>
+            <script>
+              (function(d,z,s,c){
+                s.src='//'+d+'/400/'+z;
+                s.onerror=s.onload=E;
+                function E(){c&&c();c=null}
+                try{(document.body||document.documentElement).appendChild(s)}catch(e){E()}
+              })('autchoog.net',9669800,document.createElement('script'),_khasym);
+            </script>
+          `,
+        }}
+      />
     </div>
   );
+}
+
+// --- Interstitial Ad Trigger ---
+function useInterstitialAd(active) {
+  useEffect(() => {
+    if (!active) return;
+    // Interstitial ad code (groleegni.net, 9669802)
+    const script = document.createElement("script");
+    script.innerHTML = `
+      (function(d,z,s){
+        s.src='https://'+d+'/401/'+z;
+        try{(document.body||document.documentElement).appendChild(s)}catch(e){}
+      })('groleegni.net',9669802,document.createElement('script'));
+    `;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [active]);
 }
 
 // --- Tooltip Component ---
@@ -190,6 +260,9 @@ export default function FileDownloadContainer() {
     }, 1000);
     return () => clearTimeout(checkAdBlocker);
   }, []);
+
+  // --- Interstitial Ad: show on all pages except landing
+  useInterstitialAd(currentPage !== "landing");
 
   // --- Countdown timer effect for waiting page ---
   useEffect(() => {
@@ -380,14 +453,6 @@ export default function FileDownloadContainer() {
       {!isAdClosed("topBanner") && (
         <div className="container mx-auto px-4 pt-4">
           <AdSlot position="topBanner" />
-          <button
-            onClick={() => closeAd("topBanner")}
-            className="absolute right-6 mt-2 text-gray-400 hover:text-gray-600"
-            aria-label="Close advertisement"
-            style={{ top: 0 }}
-          >
-            <X className="h-4 w-4" />
-          </button>
         </div>
       )}
 
@@ -415,13 +480,6 @@ export default function FileDownloadContainer() {
           {!isAdClosed("leftSidebar") && (
             <div className="md:w-1/4 order-2 md:order-1">
               <AdSlot position="leftSidebar" />
-              <button
-                onClick={() => closeAd("leftSidebar")}
-                className="absolute left-0 ml-2 mt-2 text-gray-400 hover:text-gray-600"
-                aria-label="Close advertisement"
-              >
-                <X className="h-4 w-4" />
-              </button>
             </div>
           )}
 
@@ -1095,13 +1153,6 @@ export default function FileDownloadContainer() {
           {!isAdClosed("rightSidebar") && (
             <div className="md:w-1/4 order-3">
               <AdSlot position="rightSidebar" />
-              <button
-                onClick={() => closeAd("rightSidebar")}
-                className="absolute right-0 mr-2 mt-2 text-gray-400 hover:text-gray-600"
-                aria-label="Close advertisement"
-              >
-                <X className="h-4 w-4" />
-              </button>
             </div>
           )}
         </div>
@@ -1110,14 +1161,6 @@ export default function FileDownloadContainer() {
         {!isAdClosed("bottomBanner") && (
           <div className="container mx-auto px-4 pt-4">
             <AdSlot position="bottomBanner" />
-            <button
-              onClick={() => closeAd("bottomBanner")}
-              className="absolute right-6 mt-2 text-gray-400 hover:text-gray-600"
-              aria-label="Close advertisement"
-              style={{ top: 0 }}
-            >
-              <X className="h-4 w-4" />
-            </button>
           </div>
         )}
       </main>
