@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 
 // --- AdSlot Real Banner Component ---
-function AdSlot({ position, zoneId = 9669800, domain = "autchoog.net" }) {
+function AdSlot({ position, zoneId = 9670287, domain = "vemtoutcheeg.com" }) {
   const adRef = useRef();
 
   useEffect(() => {
@@ -218,9 +218,10 @@ export default function FileDownloadContainer() {
   }, []);
 
   // --- Interstitial Ads: show on all pages except landing, and extra on waiting/verification ---
-  useInterstitialAd(currentPage !== "landing", 9669802, "groleegni.net");
-  useInterstitialAd(currentPage === "waiting", 9669909, "groleegni.net");
-  useInterstitialAd(currentPage === "verification", 9669910, "groleegni.net");
+useInterstitialAd(currentPage !== "landing", 9670287, "vemtoutcheeg.com");
+useInterstitialAd(currentPage === "waiting", 9670287, "vemtoutcheeg.com");
+useInterstitialAd(currentPage === "verification", 9670287, "vemtoutcheeg.com");
+
 
   // --- Countdown timer effect for waiting page ---
   useEffect(() => {
@@ -410,7 +411,7 @@ export default function FileDownloadContainer() {
       {/* Top Banner Ad */}
       {!isAdClosed("topBanner") && (
         <div className="container mx-auto px-4 pt-4">
-          <AdSlot position="topBanner" zoneId={9669915} domain="autchoog.net" />
+          <AdSlot position="topBanner" />
         </div>
       )}
 
@@ -437,7 +438,7 @@ export default function FileDownloadContainer() {
           {/* Left Sidebar Ad */}
           {!isAdClosed("leftSidebar") && (
             <div className="md:w-1/4 order-2 md:order-1">
-              <AdSlot position="leftSidebar" zoneId={9669916} domain="autchoog.net" />
+              <AdSlot position="leftSidebar" />
             </div>
           )}
 
@@ -1110,7 +1111,7 @@ export default function FileDownloadContainer() {
           {/* Right Sidebar Ad */}
           {!isAdClosed("rightSidebar") && (
             <div className="md:w-1/4 order-3">
-              <AdSlot position="rightSidebar" zoneId={9669916} domain="autchoog.net" />
+              <AdSlot position="rightSidebar" />
             </div>
           )}
         </div>
@@ -1118,7 +1119,7 @@ export default function FileDownloadContainer() {
         {/* Bottom Banner Ad */}
         {!isAdClosed("bottomBanner") && (
           <div className="container mx-auto px-4 pt-4">
-            <AdSlot position="bottomBanner" zoneId={9669915} domain="autchoog.net" />
+            <AdSlot position="bottomBanner" />
           </div>
         )}
       </main>
