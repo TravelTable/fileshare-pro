@@ -140,19 +140,6 @@ function DarkModeToggle({ darkMode, setDarkMode }) {
   );
 }
 
-// --- File Preview (Simulated) ---
-const simulatedZipContents = [
-  "README.txt",
-  "Important-Passwords.xlsx",
-  "Photos/holiday1.jpg",
-  "Photos/holiday2.jpg",
-  "Documents/ProjectPlan.docx",
-  "Documents/Invoice.pdf",
-  "Data/data.csv",
-  "Scripts/setup.sh",
-  "Presentation.pptx",
-  "Archive/old_notes.txt",
-];
 
 // --- Main Container Component ---
 export default function FileDownloadContainer() {
