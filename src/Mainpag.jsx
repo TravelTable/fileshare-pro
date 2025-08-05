@@ -22,56 +22,46 @@ import {
   ThumbsDown,
 } from "lucide-react";
 
-// --- Custom Ad Injection Component ---
-function CustomAds({ position }) {
+// --- Custom AdSlot Component for New Ad ---
+function CustomAdSlot({ position, zone = "161468" }) {
   const adRef = useRef();
 
   useEffect(() => {
-    // Remove any previous ad scripts
+    // Remove previous scripts
     while (adRef.current && adRef.current.firstChild) {
       adRef.current.removeChild(adRef.current.firstChild);
     }
-
-    if (position === "top") {
-      // First script block (obfuscated)
-      const script1 = document.createElement("script");
-      script1.setAttribute("data-cfasync", "false");
-      script1.type = "text/javascript";
-      script1.innerHTML = `(()=>{var K='ChmaorrCfozdgenziMrattShzzyrtarnedpoomrzPteonSitfreidnzgtzcseljibcOezzerlebpalraucgeizfznfoocrzEwaocdhnziaWptpnleytzngoectzzdclriehaCtdenTeepxptaNzoldmetzhRzeegvEoxmpezraztdolbizhXCGtIs=rzicfozn>ceamtazr(fdio/c<u>m"eennto)nz:gyzaclaplslizdl"o=ceallySttso r"akgneazl_bd:attuaozbsae"t=Ictresm zegmeatrIftie<mzzLrMeTmHorveenIntiezmezdcolNeeanrozldcezcdoadeehUzReIdCooNmtpnoenreanptzzebnionndzzybatlopasziedvzaellzyJtSsOzNezmDaartfeizzAtrnreamyuzcPordozmyidsoebzzpeatrasteSIyndtazenrazvtipgiartcoSrtzneenrcroudcezUeRmIazNUgianTty8BAsrtrnaeymzesleEttTeigmzedoIuytBztsneetmIenltEetrevgazlSzNAtrnreamyeBluEfeftearezrcclzetanreTmigmaeroFuttnzecmluecaorDIenttaeerrvcazltznMeevsEshacgteaCphsaindnzelllzABrrootacdeclaesStyCrheaunqnzerloztecnecloedSeyUrReIuCqozmrpeonneetnstizLTtynpeevEErervoormzeErvzernetnzeEtrsrioLrtznIemvaEgdedzaszetsnseimoenlSEteotraaegrec'.split("").reduce((v,g,L)=>L%2?v+g:g+v).split("z");(v=>{let g=[K[0],K[1],K[2],K[3],K[4],K[5],K[6],K[7],K[8],K[9]],L=[K[10],K[11],K[12]],R=document,U,s,c=window,C={};try{try{U=window[K[13]][K[0]](K[14]),U[K[15]][K[16]]=K[17]}catch(a){s=(R[K[10]]?R[K[10]][K[18]]:R[K[12]]||R[K[19]])[K[20]](),s[K[21]]=K[22],U=s[K[23]]}U[K[24]]=()=>{},R[K[9]](K[25])[0][K[26]](U),c=U[K[27]];let _={};_[K[28]]=!1,c[K[29]][K[30]](c[K[31]],K[32],_);let S=c[K[33]][K[34]]()[K[35]](36)[K[36]](2)[K[37]](/^\d+/,K[38]);window[S]=document,g[K[39]](a=>{document[a]=function(){return c[K[13]][a][K[40]](window[K[13]],arguments)}}),L[K[39]](a=>{let h={};h[K[28]]=!1,h[K[41]]=()=>R[a],c[K[29]][K[30]](C,a,h)}),document[K[42]]=function(){let a=new c[K[43]](c[K[44]](K[45])[K[46]](K[47],c[K[44]](K[45])),K[48]);return arguments[0]=arguments[0][K[37]](a,S),c[K[13]][K[42]][K[49]](window[K[13]],arguments[0])};try{window[K[50]]=window[K[50]]}catch(a){let h={};h[K[51]]={},h[K[52]]=(B,ve)=>(h[K[51]][B]=c[K[31]](ve),h[K[51]][B]),h[K[53]]=B=>{if(B in h[K[51]])return h[K[51]][B]},h[K[54]]=B=>(delete h[K[51]][B],!0),h[K[55]]=()=>(h[K[51]]={},!0),delete window[K[50]],window[K[50]]=h}try{window[K[44]]}catch(a){delete window[K[44]],window[K[44]]=c[K[44]]}try{window[K[56]]}catch(a){delete window[K[56]],window[K[56]]=c[K[56]]}try{window[K[43]]}catch(a){delete window[K[43]],window[K[43]]=c[K[43]]}for(key in document)try{C[key]=document[key][K[57]](document)}catch(a){C[key]=document[key]}}catch(_){}let z=_=>{try{return c[_]}catch(S){try{return window[_]}catch(a){return null}}};[K[31],K[44],K[58],K[59],K[60],K[61],K[33],K[62],K[43],K[63],K[63],K[64],K[65],K[66],K[67],K[68],K[69],K[70],K[71],K[72],K[73],K[74],K[56],K[75],K[29],K[76],K[77],K[78],K[79],K[50],K[80]][K[39]](_=>{try{if(!window[_])throw new c[K[78]](K[38])}catch(S){try{let a={};a[K[28]]=!1,a[K[41]]=()=>c[_],c[K[29]][K[30]](window,_,a)}catch(a){}}}),v(z(K[31]),z(K[44]),z(K[58]),z(K[59]),z(K[60]),z(K[61]),z(K[33]),z(K[62]),z(K[43]),z(K[63]),z(K[63]),z(K[64]),z(K[65]),z(K[66]),z(K[67]),z(K[68]),z(K[69]),z(K[70]),z(K[71]),z(K[72]),z(K[73]),z(K[74]),z(K[56]),z(K[75]),z(K[29]),z(K[76]),z(K[77]),z(K[78]),z(K[79]),z(K[50]),z(K[80]),C)})((v,g,L,R,U,s,c,C,z,_,S,a,h,B,ve,N,fe,rt,cn,H,lK,zn,Kt,ft,ue,yK,ut,I,ot,j,an,qt)=>{(function(d,z,s,c){s.src='//'+d+'/400/'+z;s.onerror=s.onload=E;function E(){c&&c();c=null}try{(document.body||document.documentElement).appendChild(s)}catch(e){E()}})('shaiwourtijogno.net',9670320,document.createElement('script'),_gbseowdi)});})();`;
-      adRef.current && adRef.current.appendChild(script1);
-
-      // Second script block (external)
-      const script2 = document.createElement("script");
-      script2.src = "//shaiwourtijogno.net/400/9670320";
-      script2.async = true;
-      script2.onerror = script2.onload = function () {};
-      adRef.current && adRef.current.appendChild(script2);
-    }
-
-    if (position === "bottom") {
-      // Third ad: external script
-      const script3 = document.createElement("script");
-      script3.src = "https://otieu.com/4/9670328";
-      script3.async = true;
-      adRef.current && adRef.current.appendChild(script3);
-    }
-  }, [position]);
+    // Create script
+    const script = document.createElement("script");
+    script.src = "https://fpyf8.com/88/tag.min.js";
+    script.async = true;
+    script.setAttribute("data-zone", zone);
+    script.setAttribute("data-cfasync", "false");
+    adRef.current && adRef.current.appendChild(script);
+  }, [zone]);
 
   return (
     <div
-      ref={adRef}
+      className={`ad-slot bg-gradient-to-r from-gray-100 to-gray-200 border border-dashed border-gray-300 rounded flex items-center justify-center my-2`}
       style={{
+        minHeight:
+          position === "topBanner" || position === "bottomBanner"
+            ? 80
+            : position === "inline"
+            ? 60
+            : 320,
         width: "100%",
-        minHeight: 80,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "16px 0",
+        position: "relative",
       }}
-      aria-label={`Ad: ${position}`}
-    />
+      aria-label={`Ad slot: ${position}`}
+    >
+      <span className="sr-only">Ad</span>
+      <div ref={adRef} style={{ width: "100%", height: "100%" }} />
+    </div>
   );
 }
+
+// --- Interstitial Ad Trigger (Removed) ---
 
 // --- Tooltip Component ---
 function Tooltip({ children, text }) {
@@ -402,10 +392,12 @@ export default function FileDownloadContainer() {
         </div>
       </header>
 
-      {/* Top Custom Ad */}
-      <div className="container mx-auto px-4 pt-4">
-        <CustomAds position="top" />
-      </div>
+      {/* Top Banner Ad */}
+      {!isAdClosed("topBanner") && (
+        <div className="container mx-auto px-4 pt-4">
+          <CustomAdSlot position="topBanner" />
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -427,11 +419,21 @@ export default function FileDownloadContainer() {
 
         {/* Layout: Sidebars + Main */}
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Left Sidebar (removed banner ads) */}
-          <div className="md:w-1/4 order-2 md:order-1" />
+          {/* Left Sidebar Ad */}
+          {!isAdClosed("leftSidebar") && (
+            <div className="md:w-1/4 order-2 md:order-1">
+              <CustomAdSlot position="leftSidebar" />
+            </div>
+          )}
 
           {/* Main Content Area */}
-          <div className="w-full order-1 md:order-2">
+          <div
+            className={`${
+              !isAdClosed("leftSidebar") || !isAdClosed("rightSidebar")
+                ? "md:w-2/4"
+                : "w-full"
+            } order-1 md:order-2`}
+          >
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 md:p-8 transition-colors duration-300">
               {/* Landing Page */}
               {currentPage === "landing" && (
@@ -482,6 +484,10 @@ export default function FileDownloadContainer() {
                       ))}
                     </ul>
                   </div>
+                  {/* Inline Ad */}
+                  {!isAdClosed("inlineLanding") && (
+                    <CustomAdSlot position="inline" />
+                  )}
                   {/* Social Share */}
                   <div className="pt-2">
                     <SocialShare
@@ -561,6 +567,8 @@ export default function FileDownloadContainer() {
                       </div>
                     </div>
                   </div>
+                  {/* Inline Ad */}
+                  {!isAdClosed("inlineInfo") && <CustomAdSlot position="inline" />}
                   {isAdBlockDetected && (
                     <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-start space-x-3">
                       <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
@@ -648,6 +656,8 @@ export default function FileDownloadContainer() {
                   <div className="font-bold text-2xl text-blue-600 dark:text-blue-400">
                     {countdown} seconds
                   </div>
+                  {/* Inline Ad */}
+                  {!isAdClosed("inlineWaiting") && <CustomAdSlot position="inline" />}
                   <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg max-w-md mx-auto">
                     <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
                       While you wait:
@@ -708,6 +718,8 @@ export default function FileDownloadContainer() {
                   <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">
                     Please complete the verification process to access your download. This helps us prevent automated downloads.
                   </p>
+                  {/* Top Ad Grid */}
+                  {!isAdClosed("verificationAdGrid") && <CustomAdSlot position="inline" />}
                   {/* Verification Timer */}
                   <div className="max-w-xs mx-auto bg-gray-100 dark:bg-gray-900 rounded-full h-4 overflow-hidden">
                     <div
@@ -812,6 +824,10 @@ export default function FileDownloadContainer() {
                       </button>
                     </Tooltip>
                   </form>
+                  {/* Middle Ad Banner */}
+                  {!isAdClosed("verificationMiddleBanner") && (
+                    <CustomAdSlot position="inline" />
+                  )}
                   {/* Survey Ad */}
                   {!isAdClosed("verificationSurvey") && (
                     <div className="bg-blue-50 dark:bg-blue-900 border border-blue-100 dark:border-blue-700 p-4 rounded-lg max-w-md mx-auto relative">
@@ -937,6 +953,8 @@ export default function FileDownloadContainer() {
                       <div className="text-right font-medium">{fileData.type}</div>
                     </div>
                   </div>
+                  {/* Inline Ad */}
+                  {!isAdClosed("inlineDownload") && <CustomAdSlot position="inline" />}
                   {/* Copy Link */}
                   <div className="flex justify-center gap-2 mt-2">
                     <Tooltip text="Copy direct download link">
@@ -1009,6 +1027,8 @@ export default function FileDownloadContainer() {
                       <span>Download Again</span>
                     </button>
                   </Tooltip>
+                  {/* Inline Ad */}
+                  {!isAdClosed("inlineThankYou") && <CustomAdSlot position="inline" />}
                   <div className="bg-yellow-50 dark:bg-yellow-900 border border-yellow-100 dark:border-yellow-700 p-4 rounded-lg max-w-md mx-auto">
                     <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
                       Enjoying our service?
@@ -1072,14 +1092,20 @@ export default function FileDownloadContainer() {
             </div>
           </div>
 
-          {/* Right Sidebar (removed banner ads) */}
-          <div className="md:w-1/4 order-3" />
+          {/* Right Sidebar Ad */}
+          {!isAdClosed("rightSidebar") && (
+            <div className="md:w-1/4 order-3">
+              <CustomAdSlot position="rightSidebar" />
+            </div>
+          )}
         </div>
 
-        {/* Bottom Custom Ad */}
-        <div className="container mx-auto px-4 pt-4">
-          <CustomAds position="bottom" />
-        </div>
+        {/* Bottom Banner Ad */}
+        {!isAdClosed("bottomBanner") && (
+          <div className="container mx-auto px-4 pt-4">
+            <CustomAdSlot position="bottomBanner" />
+          </div>
+        )}
       </main>
 
       {/* Footer */}
