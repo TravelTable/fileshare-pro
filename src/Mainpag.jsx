@@ -22,46 +22,70 @@ import {
   ThumbsDown,
 } from "lucide-react";
 
-// --- Custom AdSlot Component for New Ad ---
-function CustomAdSlot({ position, zone = "161468" }) {
+// --- Google AdSlot Component ---
+function GoogleAdSlot({ adSlot, adFormat = "auto", adLayout = "", style = {}, className = "", ariaLabel = "" }) {
   const adRef = useRef();
 
   useEffect(() => {
-    // Remove previous scripts
-    while (adRef.current && adRef.current.firstChild) {
-      adRef.current.removeChild(adRef.current.firstChild);
+    // Remove previous ad content
+    if (adRef.current) {
+      while (adRef.current.firstChild) {
+        adRef.current.removeChild(adRef.current.firstChild);
+      }
     }
-    // Create script
-    const script = document.createElement("script");
-    script.src = "https://fpyf8.com/88/tag.min.js";
-    script.async = true;
-    script.setAttribute("data-zone", zone);
-    script.setAttribute("data-cfasync", "false");
-    adRef.current && adRef.current.appendChild(script);
-  }, [zone]);
+
+    // Create ins element
+    const ins = document.createElement("ins");
+    ins.className = "adsbygoogle";
+    ins.style.display = "block";
+    ins.setAttribute("data-ad-client", "ca-pub-1080213544675511");
+    ins.setAttribute("data-ad-slot", adSlot);
+    ins.setAttribute("data-ad-format", adFormat);
+    if (adLayout) {
+      ins.setAttribute("data-ad-layout", adLayout);
+    }
+    Object.assign(ins.style, style);
+
+    adRef.current && adRef.current.appendChild(ins);
+
+    // Add Google Ads script if not already present
+    if (!window.adsbygoogle) {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1080213544675511";
+      script.crossOrigin = "anonymous";
+      document.body.appendChild(script);
+      script.onload = () => {
+        try {
+          window.adsbygoogle = window.adsbygoogle || [];
+          window.adsbygoogle.push({});
+        } catch (e) {}
+      };
+    } else {
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+      } catch (e) {}
+    }
+  }, [adSlot, adFormat, adLayout, style]);
 
   return (
     <div
-      className={`ad-slot bg-gradient-to-r from-gray-100 to-gray-200 border border-dashed border-gray-300 rounded flex items-center justify-center my-2`}
+      ref={adRef}
+      className={`ad-slot bg-gradient-to-r from-gray-100 to-gray-200 border border-dashed border-gray-300 rounded flex items-center justify-center my-2 ${className}`}
       style={{
-        minHeight:
-          position === "topBanner" || position === "bottomBanner"
-            ? 80
-            : position === "inline"
-            ? 60
-            : 320,
+        minHeight: style.minHeight || 80,
         width: "100%",
         position: "relative",
+        ...style,
       }}
-      aria-label={`Ad slot: ${position}`}
+      aria-label={ariaLabel}
     >
       <span className="sr-only">Ad</span>
-      <div ref={adRef} style={{ width: "100%", height: "100%" }} />
     </div>
   );
 }
-
-// --- Interstitial Ad Trigger (Removed) ---
 
 // --- Tooltip Component ---
 function Tooltip({ children, text }) {
@@ -140,7 +164,6 @@ function DarkModeToggle({ darkMode, setDarkMode }) {
   );
 }
 
-
 // --- Main Container Component ---
 export default function FileDownloadContainer() {
   // --- State ---
@@ -148,8 +171,7 @@ export default function FileDownloadContainer() {
   const [countdown, setCountdown] = useState(10);
   const [verificationCountdown, setVerificationCountdown] = useState(15);
   const [isCountdownActive, setIsCountdownActive] = useState(false);
-  const [isVerificationCountdownActive, setIsVerificationCountdownActive] =
-    useState(false);
+  const [isVerificationCountdownActive, setIsVerificationCountdownActive] = useState(false);
   const [isAdBlockDetected, setIsAdBlockDetected] = useState(false);
   const [closedAds, setClosedAds] = useState([]);
   const [isVerified, setIsVerified] = useState(false);
@@ -376,6 +398,16 @@ export default function FileDownloadContainer() {
     thankyou: "100%",
   };
 
+  // --- Google Ad Slot IDs ---
+  // You must create these ad slots in your AdSense dashboard for real ads to show.
+  const adSlots = {
+    topBanner: "8081231877",
+    bottomBanner: "8081231877",
+    leftSidebar: "8081231877",
+    rightSidebar: "8081231877",
+    inline: "8081231877",
+  };
+
   // --- Main Render ---
   return (
     <div className={`min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 transition-colors duration-300`}>
@@ -393,7 +425,12 @@ export default function FileDownloadContainer() {
       {/* Top Banner Ad */}
       {!isAdClosed("topBanner") && (
         <div className="container mx-auto px-4 pt-4">
-          <CustomAdSlot position="topBanner" />
+          <GoogleAdSlot
+            adSlot={adSlots.topBanner}
+            adFormat="auto"
+            style={{ minHeight: 90 }}
+            ariaLabel="Top Banner Ad"
+          />
         </div>
       )}
 
@@ -420,7 +457,12 @@ export default function FileDownloadContainer() {
           {/* Left Sidebar Ad */}
           {!isAdClosed("leftSidebar") && (
             <div className="md:w-1/4 order-2 md:order-1">
-              <CustomAdSlot position="leftSidebar" />
+              <GoogleAdSlot
+                adSlot={adSlots.leftSidebar}
+                adFormat="auto"
+                style={{ minHeight: 250 }}
+                ariaLabel="Left Sidebar Ad"
+              />
             </div>
           )}
 
@@ -484,7 +526,12 @@ export default function FileDownloadContainer() {
                   </div>
                   {/* Inline Ad */}
                   {!isAdClosed("inlineLanding") && (
-                    <CustomAdSlot position="inline" />
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Inline Landing Ad"
+                    />
                   )}
                   {/* Social Share */}
                   <div className="pt-2">
@@ -566,7 +613,14 @@ export default function FileDownloadContainer() {
                     </div>
                   </div>
                   {/* Inline Ad */}
-                  {!isAdClosed("inlineInfo") && <CustomAdSlot position="inline" />}
+                  {!isAdClosed("inlineInfo") && (
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Inline Info Ad"
+                    />
+                  )}
                   {isAdBlockDetected && (
                     <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-start space-x-3">
                       <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
@@ -655,7 +709,14 @@ export default function FileDownloadContainer() {
                     {countdown} seconds
                   </div>
                   {/* Inline Ad */}
-                  {!isAdClosed("inlineWaiting") && <CustomAdSlot position="inline" />}
+                  {!isAdClosed("inlineWaiting") && (
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Inline Waiting Ad"
+                    />
+                  )}
                   <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg max-w-md mx-auto">
                     <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
                       While you wait:
@@ -717,7 +778,14 @@ export default function FileDownloadContainer() {
                     Please complete the verification process to access your download. This helps us prevent automated downloads.
                   </p>
                   {/* Top Ad Grid */}
-                  {!isAdClosed("verificationAdGrid") && <CustomAdSlot position="inline" />}
+                  {!isAdClosed("verificationAdGrid") && (
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Verification Top Ad"
+                    />
+                  )}
                   {/* Verification Timer */}
                   <div className="max-w-xs mx-auto bg-gray-100 dark:bg-gray-900 rounded-full h-4 overflow-hidden">
                     <div
@@ -824,7 +892,12 @@ export default function FileDownloadContainer() {
                   </form>
                   {/* Middle Ad Banner */}
                   {!isAdClosed("verificationMiddleBanner") && (
-                    <CustomAdSlot position="inline" />
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Verification Middle Ad"
+                    />
                   )}
                   {/* Survey Ad */}
                   {!isAdClosed("verificationSurvey") && (
@@ -952,7 +1025,14 @@ export default function FileDownloadContainer() {
                     </div>
                   </div>
                   {/* Inline Ad */}
-                  {!isAdClosed("inlineDownload") && <CustomAdSlot position="inline" />}
+                  {!isAdClosed("inlineDownload") && (
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Inline Download Ad"
+                    />
+                  )}
                   {/* Copy Link */}
                   <div className="flex justify-center gap-2 mt-2">
                     <Tooltip text="Copy direct download link">
@@ -1026,7 +1106,14 @@ export default function FileDownloadContainer() {
                     </button>
                   </Tooltip>
                   {/* Inline Ad */}
-                  {!isAdClosed("inlineThankYou") && <CustomAdSlot position="inline" />}
+                  {!isAdClosed("inlineThankYou") && (
+                    <GoogleAdSlot
+                      adSlot={adSlots.inline}
+                      adFormat="auto"
+                      style={{ minHeight: 90 }}
+                      ariaLabel="Inline Thank You Ad"
+                    />
+                  )}
                   <div className="bg-yellow-50 dark:bg-yellow-900 border border-yellow-100 dark:border-yellow-700 p-4 rounded-lg max-w-md mx-auto">
                     <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
                       Enjoying our service?
@@ -1093,7 +1180,12 @@ export default function FileDownloadContainer() {
           {/* Right Sidebar Ad */}
           {!isAdClosed("rightSidebar") && (
             <div className="md:w-1/4 order-3">
-              <CustomAdSlot position="rightSidebar" />
+              <GoogleAdSlot
+                adSlot={adSlots.rightSidebar}
+                adFormat="auto"
+                style={{ minHeight: 250 }}
+                ariaLabel="Right Sidebar Ad"
+              />
             </div>
           )}
         </div>
@@ -1101,7 +1193,12 @@ export default function FileDownloadContainer() {
         {/* Bottom Banner Ad */}
         {!isAdClosed("bottomBanner") && (
           <div className="container mx-auto px-4 pt-4">
-            <CustomAdSlot position="bottomBanner" />
+            <GoogleAdSlot
+              adSlot={adSlots.bottomBanner}
+              adFormat="auto"
+              style={{ minHeight: 90 }}
+              ariaLabel="Bottom Banner Ad"
+            />
           </div>
         )}
       </main>
